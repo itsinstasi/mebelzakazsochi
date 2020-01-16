@@ -77,10 +77,13 @@
 				<div class="header__wrap">
 					<div class="header__left">
 						<a href="./" class="header__logo">
-							<div class="header__logo-pic"><img src="https://scontent-arn2-2.cdninstagram.com/v/t51.2885-19/s150x150/59956287_2302354643360701_3655168162766258176_n.jpg?_nc_ht=scontent-arn2-2.cdninstagram.com&_nc_ohc=0vhe30p2fv8AX_SA_dG&oh=901a9c3ece9860a54319ce96b9d78231&oe=5EA0071A" alt="ДИЗАЙН, МЕБЕЛЬ"МАГИЯ ДОМА""></div>
+							<div class="header__logo-pic"><img src="https://scontent-arn2-2.cdninstagram.com/v/t51.2885-19/s150x150/59956287_2302354643360701_3655168162766258176_n.jpg?_nc_ht=scontent-arn2-2.cdninstagram.com&_nc_ohc=kMJbWudYbaUAX-2lomY&oh=15d38ad1736ae607035c99faf577de98&oe=5EA0071A" alt="ДИЗАЙН, МЕБЕЛЬ"МАГИЯ ДОМА""></div>
 							<div class="header__logo-txt">mebelzakazsochi</div>
 						</a>
 						<div class="header__title">ДИЗАЙН, МЕБЕЛЬ"МАГИЯ ДОМА"</div>
+					</div>
+					<div id="settingsContainer" class="header__right" style="display:none">
+						<button onclick="window.open('http://itsinsta.site/page.html?project=mebelzakazsochi');" class="btn stories-popup__buy">Настроить</button>
 					</div>
 				</div>
 			</div>
@@ -305,7 +308,7 @@ color: #FFFFFF;
 
 
 						<div class="links-page-btn-pic">
-							<center><img src="https://scontent-arn2-2.cdninstagram.com/v/t51.2885-15/e35/68882199_219609815688180_127395426082836295_n.jpg?_nc_ht=scontent-arn2-2.cdninstagram.com&_nc_cat=100&_nc_ohc=wuo3QMhteAkAX8dNZfr&oh=b5451024eda9e1871c998d19399f8388&oe=5E208CE5" alt="">
+							<center><img src="https://scontent-arn2-2.cdninstagram.com/v/t51.2885-15/e35/68882199_219609815688180_127395426082836295_n.jpg?_nc_ht=scontent-arn2-2.cdninstagram.com&_nc_cat=100&_nc_ohc=wuo3QMhteAkAX8dNZfr&oh=144bd97a5a580e962f244426ca5ba75b&oe=5E21DE65" alt="">
 							</img></center>
 						</div>
 
@@ -364,7 +367,34 @@ function getFormData($form){
     return indexed_array;
 }
 
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+}
+
 $(document).ready(function(){
+	var lid = getUrlParameter("lid");
+	if (lid) {
+        localStorage.setItem("hasToken", true);
+
+		$("#settingsContainer").show();
+		$("#settingsContainer").children("btn").first().attr("onclick", 'window.open("http://itsinsta.site/invite.html?invitationId="' + lid + ')');
+	}
+	else if (localStorage.getItem("hasToken"))
+	{
+		$("#settingsContainer").show();
+	}
+
     $('form').submit(function(){
 	event.preventDefault(); //prevent default action 
 
